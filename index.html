@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Bitfold — split and rejoin large files</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div>
+      <div class="eyebrow">01001 → file → 01001</div>
+      <h1>Bitfold</h1>
+      <p class="sub">Cuts a large file into numbered parts under a size limit and rebuilds it byte-for-byte afterward — useful for transferring through text-based messaging apps.</p>
+    </div>
+    <div class="header-actions">
+      <a class="nav-link" href="about.html">About</a>
+      <button id="themeToggle" type="button" aria-label="Toggle light/dark mode">
+        <span class="icon" id="themeIcon">🌙</span><span id="themeLabel">Dark</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="stream"><canvas id="streamCanvas"></canvas></div>
+
+  <div class="tabs">
+    <div class="tab active" data-tab="split">split</div>
+    <div class="tab" data-tab="join">join</div>
+  </div>
+
+  <!-- SPLIT -->
+  <div class="panel" id="splitPanel">
+    <div class="row chunk-row">
+  <label for="chunkSlider" class="chunk-label">Chunk size:</label>
+  <input type="range" id="chunkSlider" min="1" max="4096" step="1" value="1536" class="chunk-slider">
+  <span id="chunkSliderLabel" class="chunk-slider-label">1.5 GB</span>
+  <input type="number" id="customChunkMB" min="1" max="4096" step="1" value="1536" class="chunk-custom">
+  <span class="chunk-unit">MB</span>
+    </div>
+    <div class="drop" id="splitDrop">
+      <div class="big">drop the large file here, or click to choose</div>
+      <div class="small">it will be cut into numbered parts at the chunk size above</div>
+      <input type="file" id="splitInput">
+    </div>
+    <div class="meta hidden" id="splitMeta"></div>
+    <div id="splitParts"></div>
+    <div class="status" id="splitStatus"></div>
+  </div>
+
+  <!-- JOIN -->
+  <div class="panel hidden" id="joinPanel">
+    <div class="drop" id="joinDrop">
+      <div class="big">drop all the part files here at once, or click to choose</div>
+      <div class="small">select every <code>.partNNNofNNN</code> file from the split step</div>
+      <input type="file" id="joinInput" multiple>
+    </div>
+    <div class="meta hidden" id="joinMeta"></div>
+    <div class="row">
+      <button class="primary" id="joinBtn">Rebuild file</button>
+      <button id="resetJoin">Clear</button>
+    </div>
+    <div class="status" id="joinStatus"></div>
+  </div>
+
+  <footer>
+    Runs entirely in your browser — nothing is uploaded anywhere. Split without loading the whole file into memory.
+  </footer>
+  <footer class="container"> Developed by Mohammed Boulifa @2026</footer>
+</div>
+
+<script src="theme.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
