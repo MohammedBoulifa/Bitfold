@@ -34,7 +34,7 @@ Any of the following works:
   ```bash
   npx serve .
   ```
-- Host it as a static site (see [Deploying](#-deploying) below)
+- Host it as a static site
 
 ### 3. Split a file
 1. Go to the **split** tab
